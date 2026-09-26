@@ -106,6 +106,7 @@ export function createScene(canvas, opts = {}) {
   let visible = true;
   let rafId = 0;
   const pointer = { x: 0, y: 0, sx: 0, sy: 0 };
+  let targetScrollP = 0;
   let scrollP = 0;
 
   const dummy = new THREE.Object3D();
@@ -137,7 +138,7 @@ export function createScene(canvas, opts = {}) {
         const s = Math.max(0, Math.sin(t * 2.1 + c.spikeSeed * 40));
         v += cur.spike * Math.pow(s, 24) * 0.9 * (c.spikeSeed > 0.6 ? 1 : 0);
       }
-      let h = 0.12 + v * cur.amp * 1.6;
+      let h = 0.12 + v * cur.amp * 1.6 * (1 + scrollP * 0.4);
 
       if (introTime >= 0) {
         const g = clamp01((introTime - (c.dist / maxDist) * 1.0) / 0.6);
@@ -161,14 +162,15 @@ export function createScene(canvas, opts = {}) {
   function updateCamera() {
     pointer.sx += (pointer.x - pointer.sx) * 0.05;
     pointer.sy += (pointer.y - pointer.sy) * 0.05;
-    const yaw = THREE.MathUtils.degToRad(-12 + pointer.sx * 4);
-    const radius = 25 - scrollP * 6;
-    const height = 13.5 - scrollP * 4.5 + pointer.sy * 1.2;
+    const yaw = THREE.MathUtils.degToRad(-12 + scrollP * 34 + pointer.sx * 4);
+    const radius = 25 - scrollP * 8;
+    const height = 13.5 + scrollP * 10.5 + pointer.sy * 1.2;
     camera.position.set(lookAt.x + Math.sin(yaw) * radius, height, lookAt.z + Math.cos(yaw) * radius);
     camera.lookAt(lookAt);
   }
 
   function step(dt) {
+    scrollP += (targetScrollP - scrollP) * Math.min(1, dt * 6);
     if (tween < 1) {
       tween = Math.min(1, tween + dt / 0.8);
       const e = easeOut(tween);
@@ -256,19 +258,17 @@ export function createScene(canvas, opts = {}) {
     pointer.x = (e.clientX / window.innerWidth) * 2 - 1;
     pointer.y = (e.clientY / window.innerHeight) * 2 - 1;
   };
-  const onScroll = () => {
-    const h = host.offsetHeight || window.innerHeight;
-    scrollP = clamp01(window.scrollY / h);
-  };
   if (!reduced) {
     window.addEventListener('pointermove', onPointer, { passive: true });
-    window.addEventListener('scroll', onScroll, { passive: true });
   }
 
   resize();
   if (reduced) renderStatic(); else start();
 
   return {
+    setScroll(p) {
+      if (!reduced) targetScrollP = clamp01(p);
+    },
     setPlan(name) {
       const p = PLANS[name];
       if (!p) return;
@@ -291,7 +291,6 @@ export function createScene(canvas, opts = {}) {
       io.disconnect();
       document.removeEventListener('visibilitychange', onVisibility);
       window.removeEventListener('pointermove', onPointer);
-      window.removeEventListener('scroll', onScroll);
       geo.dispose(); mat.dispose(); cableMat.dispose(); pulseMat.dispose();
       renderer.dispose();
     },

@@ -46,7 +46,6 @@ function initNav() {
 
   const onScroll = () => nav.classList.toggle('is-scrolled', window.scrollY > 24);
   onScroll();
-  window.addEventListener('scroll', onScroll, { passive: true });
 
   const setOpen = (open) => {
     nav.classList.toggle('is-open', open);
@@ -76,6 +75,7 @@ function initNav() {
     });
   }, { rootMargin: '-45% 0px -50% 0px' });
   links.forEach((_, id) => { const el = document.getElementById(id); if (el) io.observe(el); });
+  return onScroll;
 }
 
 /* ---------- Hero scene + demo ---------- */
@@ -93,6 +93,7 @@ async function initScene() {
       reducedMotion,
       host: $('.hero__stage'),
     });
+    sceneApi.setScroll(clamp01(window.scrollY / hero.offsetHeight));
     sceneApi.setPlan(hero.dataset.plan);
   } catch {
     hero.classList.add('no-webgl');
@@ -223,44 +224,67 @@ function initFeatures() {
   });
 }
 
-/* ---------- Scroll-linked progress (steps + monitor tilt) ---------- */
-function initScrollLinked() {
+/* ---------- Shared scroll progress ---------- */
+function initScrollLinked(updateNav) {
+  const hero = $('.hero');
   const steps = $('[data-steps]');
   const stepItems = $$('.step', steps);
-  const monitor = $('[data-monitor]');
+  const targets = $$('[data-scroll]');
+  const pinQuery = window.matchMedia('(min-width: 1021px) and (min-height: 640px)');
+  window.addEventListener('scroll', reducedMotion ? updateNav : schedule, { passive: true });
 
   if (reducedMotion) {
-    steps.style.setProperty('--progress', '1');
     stepItems.forEach((s) => s.classList.add('is-lit'));
-    monitor.style.setProperty('--tilt', '0');
     return;
   }
 
+  let rects = [];
+  let heroHeight = window.innerHeight;
+  let stepRect = { top: 0, height: 1 };
+  let vh = window.innerHeight;
   let ticking = false;
+  const measureTop = (el) => {
+    let top = 0;
+    for (let node = el; node; node = node.offsetParent) top += node.offsetTop;
+    return top;
+  };
+  const measure = () => {
+    vh = window.innerHeight;
+    heroHeight = hero.offsetHeight || vh;
+    rects = targets.map((el) => ({ el, top: measureTop(el), height: el.offsetHeight,
+      pin: el.dataset.scroll === 'pin' && pinQuery.matches }));
+    stepRect = { top: measureTop(steps), height: steps.offsetHeight };
+    schedule();
+  };
   const update = () => {
     ticking = false;
-    const vh = window.innerHeight;
-
-    const r = steps.getBoundingClientRect();
-    const p = clamp01((vh * 0.8 - r.top) / (r.height + vh * 0.35));
+    const y = window.scrollY;
+    updateNav();
+    rects.forEach(({ el, top, height, pin }) => {
+      const p = pin
+        ? clamp01((y - top) / Math.max(1, height - vh))
+        : clamp01((y + vh - top) / (vh * 0.75));
+      el.style.setProperty('--p', p.toFixed(3));
+    });
+    const hp = clamp01(y / heroHeight);
+    hero.style.setProperty('--hp', hp.toFixed(3));
+    sceneApi?.setScroll(hp);
+    const p = clamp01((y + vh * 0.8 - stepRect.top) / (stepRect.height + vh * 0.35));
     steps.style.setProperty('--progress', p.toFixed(3));
     stepItems.forEach((s, i) => s.classList.toggle('is-lit', p >= i / stepItems.length + 0.02));
-
-    const m = monitor.getBoundingClientRect();
-    const t = clamp01((m.top - vh * 0.15) / (vh * 0.7));
-    monitor.style.setProperty('--tilt', t.toFixed(3));
   };
-  const onScroll = () => { if (!ticking) { ticking = true; requestAnimationFrame(update); } };
-  window.addEventListener('scroll', onScroll, { passive: true });
-  window.addEventListener('resize', onScroll);
-  update();
+  function schedule() { if (!ticking) { ticking = true; requestAnimationFrame(update); } }
+  window.addEventListener('resize', measure, { passive: true });
+  window.addEventListener('load', measure, { once: true });
+  document.fonts?.ready.then(measure);
+  measure();
 }
 
 /* ---------- Pointer tilt (gaming console) ---------- */
 function initTilt() {
   if (reducedMotion || !window.matchMedia('(hover: hover)').matches) return;
   $$('[data-tilt]').forEach((el) => {
-    const target = el.firstElementChild;
+    const target = $('.console', el);
     el.addEventListener('pointermove', (e) => {
       const r = el.getBoundingClientRect();
       const x = (e.clientX - r.left) / r.width - 0.5;
@@ -447,10 +471,10 @@ async function initRepo() {
 /* ---------- Boot ---------- */
 $('[data-year]').textContent = new Date().getFullYear();
 initTheme();
-initNav();
+const updateNav = initNav();
 initDemo();
 initFeatures();
-initScrollLinked();
+initScrollLinked(updateNav);
 initTilt();
 initMonitor();
 initWidgets();

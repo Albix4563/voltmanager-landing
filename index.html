@@ -126,7 +126,7 @@
     <section class="section features" id="funzionalita" aria-labelledby="features-title">
       <div class="wrap">
         <header class="section__head">
-          <h2 class="section__title" id="features-title">Tutto quello che di solito cerchi nelle impostazioni avanzate</h2>
+          <h2 class="section__title" id="features-title" data-scroll>Tutto quello che di solito cerchi nelle impostazioni avanzate</h2>
           <p class="section__lead">Le funzioni che usi ogni giorno sono a un clic. Le automazioni sono opzionali e si spengono quando vuoi.</p>
         </header>
 
@@ -159,82 +159,84 @@
           </div>
 
           <div class="features__stage">
-            <div class="fpanel" id="panel-features" role="tabpanel" aria-labelledby="tab-plans" tabindex="0" data-panel>
-              <!-- Piani -->
-              <div class="fviz" data-viz="plans">
-                <div class="fviz__plans">
-                  <span class="pill pill--save">Risparmio</span>
-                  <span class="pill pill--balance is-on">Bilanciato</span>
-                  <span class="pill pill--perf">Prestazioni</span>
-                </div>
-                <div class="fviz__tray">
-                  <span class="fviz__tray-icon"><img src="assets/img/project_logo.png" alt="" width="22" height="22"></span>
-                  <span>Piano attivo: Bilanciato</span>
-                </div>
-                <p class="fviz__caption">Tre modi per cambiare, lo stesso risultato: Home, area di notifica, jump list.</p>
-              </div>
-              <!-- Regole CPU -->
-              <div class="fviz" data-viz="rules" hidden>
-                <svg class="fviz__chart" viewBox="0 0 400 200" role="img" aria-label="Grafico del carico CPU con soglia bassa al 20% e soglia alta al 75%">
-                  <line class="chart-th chart-th--high" x1="0" y1="50" x2="400" y2="50"/>
-                  <line class="chart-th chart-th--low" x1="0" y1="160" x2="400" y2="160"/>
-                  <text class="chart-label" x="6" y="42">Sopra 75%: Prestazioni</text>
-                  <text class="chart-label" x="6" y="152">Sotto 20%: Risparmio</text>
-                  <path class="chart-line" d="M0 170 C30 168 50 175 80 165 S120 120 150 90 S190 30 220 38 S260 60 280 110 S330 172 360 168 S390 166 400 170"/>
-                  <circle class="chart-dot chart-dot--perf" cx="208" cy="42" r="6"/>
-                  <circle class="chart-dot chart-dot--save" cx="330" cy="166" r="6"/>
-                </svg>
-                <p class="fviz__caption">Il piano cambia solo se il carico resta oltre la soglia; il cooldown blocca i rimbalzi.</p>
-              </div>
-              <!-- Rete o batteria -->
-              <div class="fviz" data-viz="power" hidden>
-                <div class="fviz__power">
-                  <div class="fviz__source">
-                    <svg viewBox="0 0 48 48" aria-hidden="true"><path d="M18 6v10M30 6v10M12 16h24v8a12 12 0 0 1-24 0zM24 36v8"/></svg>
-                    <span>Rete elettrica</span>
+            <div class="features__motion" data-scroll>
+              <div class="fpanel" id="panel-features" role="tabpanel" aria-labelledby="tab-plans" tabindex="0" data-panel>
+                <!-- Piani -->
+                <div class="fviz" data-viz="plans">
+                  <div class="fviz__plans">
+                    <span class="pill pill--save">Risparmio</span>
                     <span class="pill pill--balance is-on">Bilanciato</span>
+                    <span class="pill pill--perf">Prestazioni</span>
                   </div>
-                  <div class="fviz__source">
-                    <svg viewBox="0 0 48 48" aria-hidden="true"><rect x="6" y="14" width="32" height="20" rx="3"/><path d="M42 21v6"/><rect class="fviz__cell" x="10" y="18" width="12" height="12" rx="1"/></svg>
-                    <span>Batteria</span>
-                    <span class="pill pill--save is-on">Risparmio</span>
+                  <div class="fviz__tray">
+                    <span class="fviz__tray-icon"><img src="assets/img/project_logo.png" alt="" width="22" height="22"></span>
+                    <span>Piano attivo: Bilanciato</span>
                   </div>
+                  <p class="fviz__caption">Tre modi per cambiare, lo stesso risultato: Home, area di notifica, jump list.</p>
                 </div>
-                <p class="fviz__caption">Regole separate per rete e batteria. La soglia di batteria scarica è configurabile.</p>
-              </div>
-              <!-- Profili app -->
-              <div class="fviz" data-viz="apps" hidden>
-                <ul class="fviz__apps">
-                  <li><span class="app-dot" style="--c:#7c5cff"></span><span>Blender</span><span class="pill pill--perf is-on">Prestazioni</span></li>
-                  <li><span class="app-dot" style="--c:#2f9e44"></span><span>Excel</span><span class="pill pill--balance is-on">Bilanciato</span></li>
-                  <li><span class="app-dot" style="--c:#e8590c"></span><span>VLC</span><span class="pill pill--save is-on">Risparmio</span></li>
-                </ul>
-                <p class="fviz__caption">Chiudi l'app e torna il piano che avevi prima. Il profilo può anche tenere il PC attivo.</p>
-              </div>
-              <!-- Memoria -->
-              <div class="fviz" data-viz="memory" hidden>
-                <div class="fviz__mem" role="img" aria-label="Memoria: 7,4 GB in uso, 5,1 GB in standby, 3,5 GB libera">
-                  <span class="mem-seg mem-seg--used" style="--w:46%"></span>
-                  <span class="mem-seg mem-seg--standby" style="--w:32%"></span>
-                  <span class="mem-seg mem-seg--free" style="--w:22%"></span>
+                <!-- Regole CPU -->
+                <div class="fviz" data-viz="rules" hidden>
+                  <svg class="fviz__chart" viewBox="0 0 400 200" role="img" aria-label="Grafico del carico CPU con soglia bassa al 20% e soglia alta al 75%">
+                    <line class="chart-th chart-th--high" x1="0" y1="50" x2="400" y2="50"/>
+                    <line class="chart-th chart-th--low" x1="0" y1="160" x2="400" y2="160"/>
+                    <text class="chart-label" x="6" y="42">Sopra 75%: Prestazioni</text>
+                    <text class="chart-label" x="6" y="152">Sotto 20%: Risparmio</text>
+                    <path class="chart-line" d="M0 170 C30 168 50 175 80 165 S120 120 150 90 S190 30 220 38 S260 60 280 110 S330 172 360 168 S390 166 400 170"/>
+                    <circle class="chart-dot chart-dot--perf" cx="208" cy="42" r="6"/>
+                    <circle class="chart-dot chart-dot--save" cx="330" cy="166" r="6"/>
+                  </svg>
+                  <p class="fviz__caption">Il piano cambia solo se il carico resta oltre la soglia; il cooldown blocca i rimbalzi.</p>
                 </div>
-                <dl class="fviz__legend">
-                  <div><dt><span class="sw sw--used"></span>In uso</dt><dd>7,4 GB</dd></div>
-                  <div><dt><span class="sw sw--standby"></span>Standby</dt><dd>5,1 GB</dd></div>
-                  <div><dt><span class="sw sw--free"></span>Libera</dt><dd>3,5 GB</dd></div>
-                </dl>
-                <p class="fviz__caption">Pulizia manuale o programmata della standby list.</p>
-              </div>
-              <!-- Mantieni attivo -->
-              <div class="fviz" data-viz="awake" hidden>
-                <div class="fviz__awake">
-                  <svg viewBox="0 0 64 64" aria-hidden="true"><path d="M44 38A18 18 0 0 1 26 14a18 18 0 1 0 18 24Z"/><path class="fviz__strike" d="M10 54 54 10"/></svg>
-                  <div>
-                    <p class="fviz__big">Attivo da 1 h 42 min</p>
-                    <p class="fviz__small">Timeout di Windows invariati</p>
+                <!-- Rete o batteria -->
+                <div class="fviz" data-viz="power" hidden>
+                  <div class="fviz__power">
+                    <div class="fviz__source">
+                      <svg viewBox="0 0 48 48" aria-hidden="true"><path d="M18 6v10M30 6v10M12 16h24v8a12 12 0 0 1-24 0zM24 36v8"/></svg>
+                      <span>Rete elettrica</span>
+                      <span class="pill pill--balance is-on">Bilanciato</span>
+                    </div>
+                    <div class="fviz__source">
+                      <svg viewBox="0 0 48 48" aria-hidden="true"><rect x="6" y="14" width="32" height="20" rx="3"/><path d="M42 21v6"/><rect class="fviz__cell" x="10" y="18" width="12" height="12" rx="1"/></svg>
+                      <span>Batteria</span>
+                      <span class="pill pill--save is-on">Risparmio</span>
+                    </div>
                   </div>
+                  <p class="fviz__caption">Regole separate per rete e batteria. La soglia di batteria scarica è configurabile.</p>
                 </div>
-                <p class="fviz__caption">Si spegne quando lo disattivi e Windows torna esattamente come prima.</p>
+                <!-- Profili app -->
+                <div class="fviz" data-viz="apps" hidden>
+                  <ul class="fviz__apps">
+                    <li><span class="app-dot" style="--c:#7c5cff"></span><span>Blender</span><span class="pill pill--perf is-on">Prestazioni</span></li>
+                    <li><span class="app-dot" style="--c:#2f9e44"></span><span>Excel</span><span class="pill pill--balance is-on">Bilanciato</span></li>
+                    <li><span class="app-dot" style="--c:#e8590c"></span><span>VLC</span><span class="pill pill--save is-on">Risparmio</span></li>
+                  </ul>
+                  <p class="fviz__caption">Chiudi l'app e torna il piano che avevi prima. Il profilo può anche tenere il PC attivo.</p>
+                </div>
+                <!-- Memoria -->
+                <div class="fviz" data-viz="memory" hidden>
+                  <div class="fviz__mem" role="img" aria-label="Memoria: 7,4 GB in uso, 5,1 GB in standby, 3,5 GB libera">
+                    <span class="mem-seg mem-seg--used" style="--w:46%"></span>
+                    <span class="mem-seg mem-seg--standby" style="--w:32%"></span>
+                    <span class="mem-seg mem-seg--free" style="--w:22%"></span>
+                  </div>
+                  <dl class="fviz__legend">
+                    <div><dt><span class="sw sw--used"></span>In uso</dt><dd>7,4 GB</dd></div>
+                    <div><dt><span class="sw sw--standby"></span>Standby</dt><dd>5,1 GB</dd></div>
+                    <div><dt><span class="sw sw--free"></span>Libera</dt><dd>3,5 GB</dd></div>
+                  </dl>
+                  <p class="fviz__caption">Pulizia manuale o programmata della standby list.</p>
+                </div>
+                <!-- Mantieni attivo -->
+                <div class="fviz" data-viz="awake" hidden>
+                  <div class="fviz__awake">
+                    <svg viewBox="0 0 64 64" aria-hidden="true"><path d="M44 38A18 18 0 0 1 26 14a18 18 0 1 0 18 24Z"/><path class="fviz__strike" d="M10 54 54 10"/></svg>
+                    <div>
+                      <p class="fviz__big">Attivo da 1 h 42 min</p>
+                      <p class="fviz__small">Timeout di Windows invariati</p>
+                    </div>
+                  </div>
+                  <p class="fviz__caption">Si spegne quando lo disattivi e Windows torna esattamente come prima.</p>
+                </div>
               </div>
             </div>
           </div>
@@ -258,9 +260,9 @@
     <section class="section steps" id="come-funziona" aria-labelledby="steps-title">
       <div class="wrap">
         <header class="section__head">
-          <h2 class="section__title" id="steps-title">Lo imposti una volta, poi lavora da solo</h2>
+          <h2 class="section__title" id="steps-title" data-scroll>Lo imposti una volta, poi lavora da solo</h2>
         </header>
-        <ol class="steps__list" data-steps>
+        <ol class="steps__list" data-steps data-scroll>
           <li class="step">
             <span class="step__num" aria-hidden="true">1</span>
             <h3 class="step__title">Installa</h3>
@@ -281,31 +283,35 @@
     </section>
 
     <!-- Gaming -->
-    <section class="section gaming" id="gaming" aria-labelledby="gaming-title">
-      <div class="wrap split">
-        <div class="split__text">
-          <h2 class="section__title" id="gaming-title">Quando giochi, niente compromessi.</h2>
-          <p class="section__lead">La modalità gaming riconosce giochi e app pesanti, tiene attivo il profilo Prestazioni e, quando il carico cala, ti propone di tornare alla modalità automatica.</p>
-          <ul class="ticks">
-            <li>Rilevamento automatico dei carichi impegnativi</li>
-            <li>Prestazioni bloccate finché serve</li>
-            <li>Ritorno alla modalità automatica quando hai finito</li>
-          </ul>
-        </div>
-        <div class="tilt" data-tilt>
-          <div class="console">
-            <div class="console__layer console__base"></div>
-            <div class="console__layer console__head">
-              <span class="console__label">Applicazione rilevata</span>
-              <span class="console__app">Forza Horizon 5</span>
-            </div>
-            <div class="console__layer console__profile">
-              <span class="console__label">Profilo attivo</span>
-              <span class="pill pill--perf is-on">Prestazioni</span>
-            </div>
-            <div class="console__layer console__bars">
-              <div class="bar"><span>CPU</span><span class="bar__track"><span class="bar__fill" style="--v:.72"></span></span><span class="num">72%</span></div>
-              <div class="bar"><span>GPU</span><span class="bar__track"><span class="bar__fill bar__fill--gpu" style="--v:.94"></span></span><span class="num">94%</span></div>
+    <section class="section gaming" id="gaming" aria-labelledby="gaming-title" data-scroll="pin">
+      <div class="pin">
+        <div class="wrap split">
+          <div class="split__text">
+            <h2 class="section__title" id="gaming-title">Quando giochi, niente compromessi.</h2>
+            <p class="section__lead">La modalità gaming riconosce giochi e app pesanti, tiene attivo il profilo Prestazioni e, quando il carico cala, ti propone di tornare alla modalità automatica.</p>
+            <ul class="ticks">
+              <li>Rilevamento automatico dei carichi impegnativi</li>
+              <li>Prestazioni bloccate finché serve</li>
+              <li>Ritorno alla modalità automatica quando hai finito</li>
+            </ul>
+          </div>
+          <div class="tilt" data-tilt>
+            <div class="console">
+              <div class="console__motion">
+                <div class="console__layer console__base"></div>
+                <div class="console__layer console__head">
+                  <span class="console__label">Applicazione rilevata</span>
+                  <span class="console__app">Forza Horizon 5</span>
+                </div>
+                <div class="console__layer console__profile">
+                  <span class="console__label">Profilo attivo</span>
+                  <span class="pill pill--perf is-on">Prestazioni</span>
+                </div>
+                <div class="console__layer console__bars">
+                  <div class="bar"><span>CPU</span><span class="bar__track"><span class="bar__fill" style="--v:.72"></span></span><span class="num">72%</span></div>
+                  <div class="bar"><span>GPU</span><span class="bar__track"><span class="bar__fill bar__fill--gpu" style="--v:.94"></span></span><span class="num">94%</span></div>
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -313,45 +319,47 @@
     </section>
 
     <!-- Monitoraggio -->
-    <section class="section monitor" id="monitoraggio" aria-labelledby="monitor-title">
-      <div class="wrap">
-        <header class="section__head">
-          <h2 class="section__title" id="monitor-title">Leggi il tuo PC in tempo reale</h2>
-          <p class="section__lead">CPU, GPU, RAM, disco, temperature, frequenze e processi principali in un'unica vista, quando i driver espongono i dati.</p>
-        </header>
+    <section class="section monitor" id="monitoraggio" aria-labelledby="monitor-title" data-scroll="pin">
+      <div class="pin">
+        <div class="wrap">
+          <header class="section__head">
+            <h2 class="section__title" id="monitor-title">Leggi il tuo PC in tempo reale</h2>
+            <p class="section__lead">CPU, GPU, RAM, disco, temperature, frequenze e processi principali in un'unica vista, quando i driver espongono i dati.</p>
+          </header>
 
-        <div class="monitor__scene" data-monitor>
-          <div class="dash" role="img" aria-label="Anteprima della dashboard di VoltManager con carico CPU, temperatura, memoria e processi principali">
-            <div class="dash__side" aria-hidden="true">
-              <span class="dash__brand"><img src="assets/img/project_logo.png" alt="" width="20" height="20"> VoltManager</span>
-              <span class="dash__nav">Home</span>
-              <span class="dash__nav is-on">Monitor</span>
-              <span class="dash__nav">Piani</span>
-              <span class="dash__nav">Automazioni</span>
-              <span class="dash__nav">Widget</span>
-            </div>
-            <div class="dash__main" aria-hidden="true">
-              <div class="dash__card dash__card--wide">
-                <div class="dash__head"><span>CPU, ultimi 60 minuti</span><span class="num"><span data-mon-cpu>38</span>%</span></div>
-                <svg class="dash__spark" viewBox="0 0 300 80" preserveAspectRatio="none"><path class="dash__area" data-mon-area d=""/><path class="dash__line" data-mon-line d=""/></svg>
+          <div class="monitor__scene" data-monitor>
+            <div class="dash" role="img" aria-label="Anteprima della dashboard di VoltManager con carico CPU, temperatura, memoria e processi principali">
+              <div class="dash__side" aria-hidden="true">
+                <span class="dash__brand"><img src="assets/img/project_logo.png" alt="" width="20" height="20"> VoltManager</span>
+                <span class="dash__nav">Home</span>
+                <span class="dash__nav is-on">Monitor</span>
+                <span class="dash__nav">Piani</span>
+                <span class="dash__nav">Automazioni</span>
+                <span class="dash__nav">Widget</span>
               </div>
-              <div class="dash__card">
-                <div class="dash__head"><span>Temperatura CPU</span></div>
-                <div class="gauge" style="--g:.56" data-mon-gauge><span class="num"><span data-mon-temp>56</span>°C</span></div>
-              </div>
-              <div class="dash__card">
-                <div class="dash__head"><span>RAM in uso</span><span class="num"><span data-mon-ram>9,8</span> GB</span></div>
-                <div class="dash__meter"><span data-mon-ram-bar style="--v:.61"></span></div>
-                <div class="dash__head dash__head--sub"><span>GPU</span><span class="num"><span data-mon-gpu>21</span>%</span></div>
-                <div class="dash__meter dash__meter--gpu"><span data-mon-gpu-bar style="--v:.21"></span></div>
-              </div>
-              <div class="dash__card dash__card--wide">
-                <div class="dash__head"><span>Processi principali</span></div>
-                <ul class="dash__procs">
-                  <li><span>chrome.exe</span><span class="num">11,2%</span></li>
-                  <li><span>Code.exe</span><span class="num">6,4%</span></li>
-                  <li><span>Teams.exe</span><span class="num">3,1%</span></li>
-                </ul>
+              <div class="dash__main" aria-hidden="true">
+                <div class="dash__card dash__card--wide" style="--i:0">
+                  <div class="dash__head"><span>CPU, ultimi 60 minuti</span><span class="num"><span data-mon-cpu>38</span>%</span></div>
+                  <svg class="dash__spark" viewBox="0 0 300 80" preserveAspectRatio="none"><path class="dash__area" data-mon-area d=""/><path class="dash__line" data-mon-line d=""/></svg>
+                </div>
+                <div class="dash__card" style="--i:1">
+                  <div class="dash__head"><span>Temperatura CPU</span></div>
+                  <div class="gauge" style="--g:.56" data-mon-gauge><span class="num"><span data-mon-temp>56</span>°C</span></div>
+                </div>
+                <div class="dash__card" style="--i:2">
+                  <div class="dash__head"><span>RAM in uso</span><span class="num"><span data-mon-ram>9,8</span> GB</span></div>
+                  <div class="dash__meter"><span data-mon-ram-bar style="--v:.61"></span></div>
+                  <div class="dash__head dash__head--sub"><span>GPU</span><span class="num"><span data-mon-gpu>21</span>%</span></div>
+                  <div class="dash__meter dash__meter--gpu"><span data-mon-gpu-bar style="--v:.21"></span></div>
+                </div>
+                <div class="dash__card dash__card--wide" style="--i:3">
+                  <div class="dash__head"><span>Processi principali</span></div>
+                  <ul class="dash__procs">
+                    <li><span>chrome.exe</span><span class="num">11,2%</span></li>
+                    <li><span>Code.exe</span><span class="num">6,4%</span></li>
+                    <li><span>Teams.exe</span><span class="num">3,1%</span></li>
+                  </ul>
+                </div>
               </div>
             </div>
           </div>
@@ -360,32 +368,34 @@
     </section>
 
     <!-- Widget -->
-    <section class="section widgets" id="widget" aria-labelledby="widget-title">
-      <div class="wrap split split--reverse">
-        <div class="split__text">
-          <h2 class="section__title" id="widget-title">Widget discreti, sempre sott'occhio.</h2>
-          <p class="section__lead">Orologio, calendario, utilizzo, temperature, alimentazione e piani energetici direttamente sul desktop. Scegli tu quali mostrare.</p>
-        </div>
-        <div class="desk" tabindex="0" aria-label="Anteprima dei widget desktop. Passa sopra per aprirli." data-desk>
-          <div class="wstack">
-            <div class="widget widget--clock">
-              <span class="widget__big num" data-clock>--:--</span>
-              <span class="widget__small" data-date>&nbsp;</span>
-            </div>
-            <div class="widget widget--cal">
-              <span class="widget__small" data-cal-month>&nbsp;</span>
-              <span class="widget__big num" data-cal-day>--</span>
-              <span class="widget__small">Nessun evento</span>
-            </div>
-            <div class="widget widget--usage">
-              <span class="widget__small">Utilizzo</span>
-              <div class="bar"><span>CPU</span><span class="bar__track"><span class="bar__fill" style="--v:.28"></span></span></div>
-              <div class="bar"><span>RAM</span><span class="bar__track"><span class="bar__fill bar__fill--gpu" style="--v:.52"></span></span></div>
-            </div>
-            <div class="widget widget--plan">
-              <span class="widget__small">Alimentazione</span>
-              <span class="widget__mid">Batteria 81%</span>
-              <span class="pill pill--save is-on">Risparmio</span>
+    <section class="section widgets" id="widget" aria-labelledby="widget-title" data-scroll="pin">
+      <div class="pin">
+        <div class="wrap split split--reverse">
+          <div class="split__text">
+            <h2 class="section__title" id="widget-title">Widget discreti, sempre sott'occhio.</h2>
+            <p class="section__lead">Orologio, calendario, utilizzo, temperature, alimentazione e piani energetici direttamente sul desktop. Scegli tu quali mostrare.</p>
+          </div>
+          <div class="desk" tabindex="0" aria-label="Anteprima dei widget desktop. Passa sopra per aprirli." data-desk>
+            <div class="wstack">
+              <div class="widget widget--clock">
+                <span class="widget__big num" data-clock>--:--</span>
+                <span class="widget__small" data-date>&nbsp;</span>
+              </div>
+              <div class="widget widget--cal">
+                <span class="widget__small" data-cal-month>&nbsp;</span>
+                <span class="widget__big num" data-cal-day>--</span>
+                <span class="widget__small">Nessun evento</span>
+              </div>
+              <div class="widget widget--usage">
+                <span class="widget__small">Utilizzo</span>
+                <div class="bar"><span>CPU</span><span class="bar__track"><span class="bar__fill" style="--v:.28"></span></span></div>
+                <div class="bar"><span>RAM</span><span class="bar__track"><span class="bar__fill bar__fill--gpu" style="--v:.52"></span></span></div>
+              </div>
+              <div class="widget widget--plan">
+                <span class="widget__small">Alimentazione</span>
+                <span class="widget__mid">Batteria 81%</span>
+                <span class="pill pill--save is-on">Risparmio</span>
+              </div>
             </div>
           </div>
         </div>
@@ -395,14 +405,14 @@
     <!-- Privacy -->
     <section class="section privacy" id="privacy" aria-labelledby="privacy-title">
       <div class="wrap privacy__grid">
-        <h2 class="section__title privacy__title" id="privacy-title">I tuoi dati restano sul tuo PC.</h2>
+        <h2 class="section__title privacy__title" id="privacy-title" data-scroll>I tuoi dati restano sul tuo PC.</h2>
         <div class="privacy__body">
           <p class="section__lead">Nessun account, nessuna telemetria, nessun cloud. La connessione serve solo per gli aggiornamenti.</p>
           <p>Il codice è pubblico su GitHub: puoi leggere cosa fa l'app, compilarla da te e proporre modifiche. La licenza è nel repository.</p>
         </div>
       </div>
       <div class="wrap">
-        <dl class="facts" data-facts>
+        <dl class="facts" data-facts data-scroll>
           <div class="fact"><dt>lingue: italiano, inglese, spagnolo, cinese semplificato</dt><dd class="num" data-count="4">4</dd></div>
           <div class="fact"><dt>piani rapidi</dt><dd class="num" data-count="3">3</dd></div>
           <div class="fact"><dt>eventi nella cronologia dei piani</dt><dd class="num" data-count="500">500</dd></div>
@@ -416,13 +426,13 @@
     <section class="section download" id="download" aria-labelledby="download-title">
       <div class="wrap download__grid">
         <div class="download__main" data-release aria-busy="true">
-          <h2 class="section__title" id="download-title">Scarica VoltManager</h2>
+          <h2 class="section__title" id="download-title" data-scroll>Scarica VoltManager</h2>
           <p class="download__version">
             <span class="num download__ver" data-release-version>Ultima versione</span>
             <span class="download__date" data-release-date>&nbsp;</span>
           </p>
 
-          <div class="dl-options">
+          <div class="dl-options" data-scroll>
             <a class="dl-option dl-option--main" href="https://github.com/Albix4563/VoltManager/releases/latest" data-download>
               <span class="dl-option__title">Installer (consigliato)</span>
               <span class="dl-option__file" data-asset-setup>VoltManagerSetup.exe</span>
@@ -462,7 +472,7 @@
     <section class="section install" id="installazione" aria-labelledby="install-title">
       <div class="wrap">
         <header class="section__head">
-          <h2 class="section__title" id="install-title">Installazione</h2>
+          <h2 class="section__title" id="install-title" data-scroll>Installazione</h2>
         </header>
         <div class="install__grid">
           <div class="install__col">
@@ -502,7 +512,7 @@
     <!-- FAQ -->
     <section class="section faq" id="faq" aria-labelledby="faq-title">
       <div class="wrap faq__grid">
-        <h2 class="section__title" id="faq-title">Domande frequenti</h2>
+        <h2 class="section__title" id="faq-title" data-scroll>Domande frequenti</h2>
         <div class="faq__list">
           <details class="faq__item">
             <summary>È gratis?</summary>
