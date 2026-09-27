@@ -813,6 +813,7 @@ section[id] { scroll-margin-top: calc(var(--nav-h) + 1rem); }
 .install__steps li::before {
   content: counter(s); font-weight: 800; font-stretch: 75%; font-size: var(--step-1); color: var(--cobalt-hi);
 }
+.install__steps code { overflow-wrap: anywhere; }
 .install__note { margin-top: 1rem; padding-left: 2.95rem; font-size: var(--step--1); color: var(--text-2); }
 .table-wrap { margin-top: clamp(3rem, 6vw, 4.5rem); overflow-x: auto; }
 .reqs { width: 100%; border-collapse: collapse; font-size: var(--step--1); }
